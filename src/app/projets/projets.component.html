@@ -1,0 +1,99 @@
+<body>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <h1>Lillab'Connect</h1>
+    <span class="menu-spacer"></span>
+    <div>
+
+      <a mat-button [routerLink]="'/idees'" routerLinkActive="active"> Idees</a>
+      <button mat-button [matMenuTriggerFor]="menu">Appel à Projets </button>
+      <mat-menu #menu="matMenu">
+        <div>
+          <button   mat-menu-item [routerLink]="'/projetCreation'">Créer un projet</button>
+          <button  [disabled]="user.typeutilisateur!==userIng" mat-menu-item>Mes projets</button>
+        </div>
+
+      </mat-menu>
+
+      <!-- <a mat-button [routerLink]="'/idees'" routerLinkActive="active"> Idees </a>-->
+
+      <button mat-button [routerLink]="'/stories'" routerLinkActive="active"> Success Stories </button>
+
+      <button mat-button [matMenuTriggerFor]="menuEvenements">Evenements</button>
+      <mat-menu #menuEvenements="matMenu">
+        <button mat-menu-item [routerLink]="'/evenements'"> Evènements </button>
+        <button mat-menu-item [routerLink]="'/evenementCreation'">Créer un évènement</button>
+      </mat-menu>
+
+      <button mat-button [routerLink]="'/profile'" routerLinkActive="active"> Profil </button>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+<section>
+  <div class="gap gray-bg">
+    <div class="container">
+      <div class="row" id="page-contents">
+        <div class="col-lg-12">
+          <div class="blog-sec">
+            <!--<div class="post-filter-sec">
+              <form method="post" class="filter-form">
+                <input type="post" placeholder="Rechercher une idée">
+                <button><i class="ti-search"></i></button>
+              </form>
+              <div class="purify">
+                <span>filtrer par</span>
+                <select>
+                  <option>Par mot-clés</option>
+                  <option>Par tags</option>
+
+                </select>
+                <select>
+                  <option>Descendant (date)</option>
+                  <option>Ascendant (date)</option>
+                  <option>Ascendant (likes)</option>
+                  <option>Descendant (likes)</option>
+
+                </select>
+                <a href="#" title="">rafraîchir</a>
+              </div>
+            </div>-->
+            <div class="l-post">
+             <!-- <figure>
+                <img src="../assets/images/resources/bloglist-1.jpg" alt="">
+
+              </figure>-->
+              <div class="row">
+                <div class="col-lg-4 col-sm-6"  *ngFor="let projet of projets ; let i = index">
+                  <div >
+                    <mat-card class="open-position">
+                      <mat-card-header>
+                        <mat-card-title class="post-title">{{projet.titre}}</mat-card-title>
+                        <mat-card-subtitle>Créé par: {{projet.utilisateur.prenom}} {{projet.utilisateur.nom}} <br>
+                        </mat-card-subtitle>
+                      </mat-card-header>
+                      <img mat-card-image src="../assets/images/resources/bloglist-1.jpg" alt="">
+                      <mat-card-content>
+                        <p class="hidden-text-description">
+                          {{projet.description}}
+                        </p>
+                      </mat-card-content>
+                      <mat-card-actions >
+                        <span><h6>Posté le : {{projet.dateCreation}}</h6></span>
+                        <a [routerLink]="''" >Voir plus</a>
+<!--                        <button mat-button>Voir plus</button>-->
+                      </mat-card-actions>
+                    </mat-card>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+          <!--  <button class="btn-view btn-load-more">Load More</button>-->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>

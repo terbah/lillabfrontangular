@@ -1,0 +1,43 @@
+.example-card {
+  max-width: 60%;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.aligned-with-icon{
+  position: absolute;
+  margin-top: 5px;
+  margin-left: 5px; /* optional */
+}
+
+.with-icon {
+  display: flex;
+  align-items: center;
+}
+.gray-icon{
+  color: gray;
+}
+
+.example-card {
+  max-width: 400px;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.hidden-text-description{
+  white-space: nowrap;      /*keep text on one line */
+  overflow: hidden;         /*prevent text from being shown outside the border */
+  text-overflow: ellipsis;  /*cut off text with an ellipsis*/
+}
+
+#wrapper{
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+}

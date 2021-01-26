@@ -1,0 +1,36 @@
+<h2 mat-dialog-title>{{this.ideeModify.titre}}</h2>
+
+<mat-dialog-content [formGroup]="form">
+
+  <mat-form-field appearance="outline" class="full-width">
+    <input matInput placeholder="Titre" formControlName="titre">
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="full-width">
+    <textarea  matInput placeholder="Description" formControlName="description">
+       </textarea>
+  </mat-form-field>
+
+  <div style="margin-bottom: 25px" class="input-group">
+    <label>Domaines </label>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-select multiple formControlName="domaineList">
+        <mat-option *ngFor="let domaine of domaines" [value]="domaine">{{domaine.libelle}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div style="margin-bottom: 25px" class="input-group">
+    <label>Compétences</label>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-select multiple formControlName="competenceList">
+        <mat-option *ngFor="let competence of competences"
+                    [value]="competence">{{competence.libelle}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions id="wrapper">
+  <button class="mat-raised-button mat-primary"(click)="update()">Enrégistrer</button>
+  <button class="mat-raised-button"(click)="close()" style=" margin-left: 10px;">Fermer</button>
+</mat-dialog-actions>

@@ -1,0 +1,100 @@
+<body>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <h1>Lillab'Connect</h1>
+    <span class="menu-spacer"></span>
+    <div>
+
+      <button mat-button [matMenuTriggerFor]="menu">Idees</button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="'/idees'">Toutes les idées</button>
+        <button mat-menu-item [routerLink]="'/ideeCreation'">Créer une idée</button>
+        <button mat-menu-item [routerLink]="'/ideesPerUser'">Mes idées</button>
+      </mat-menu>
+
+      <!-- <a mat-button [routerLink]="'/events'" routerLinkActive="active"> Idees </a>-->
+      <button mat-button [routerLink]="'/projets'" routerLinkActive="active"> Appel à Projets  </button>
+      <button mat-button [routerLink]="'/stories'" routerLinkActive="active"> Success Stories </button>
+
+      <button mat-button [matMenuTriggerFor]="menuEvenements">Evenements</button>
+      <mat-menu #menuEvenements="matMenu">
+        <button mat-menu-item [routerLink]="'/evenements'"> Evènements </button>
+        <button mat-menu-item [routerLink]="'/evenementCreation'">Créer un évènement</button>
+      </mat-menu>
+
+      <button mat-button [routerLink]="'/profile'" routerLinkActive="active"> Profil </button>
+    </div>
+    <span class="example-spacer"></span>
+    <!-- <mat-icon>more_vert</mat-icon>-->
+    <a mat-button (click)="logout()"> Déconnexion </a>
+  </mat-toolbar-row>
+</mat-toolbar>
+<section>
+  <div class="gap gray-bg">
+    <div class="container">
+      <div class="row" id="page-contents">
+        <div class="col-lg-12">
+          <div class="blog-sec">
+            <!--<div class="post-filter-sec">
+              <form method="post" class="filter-form">
+                <input type="post" placeholder="Rechercher une idée">
+                <button><i class="ti-search"></i></button>
+              </form>
+              <div class="purify">
+                <span>filtrer par</span>
+                <select>
+                  <option>Par mot-clés</option>
+                  <option>Par tags</option>
+
+                </select>
+                <select>
+                  <option>Descendant (date)</option>
+                  <option>Ascendant (date)</option>
+                  <option>Ascendant (likes)</option>
+                  <option>Descendant (likes)</option>
+
+                </select>
+                <a href="#" title="">rafraîchir</a>
+              </div>
+            </div>-->
+            <div class="l-post" *ngFor="let event of evenements ; let i = index">
+              <figure>
+                <img src="../assets/images/resources/bloglist-1.jpg" alt="">
+
+              </figure>
+              <div class="l-post-meta">
+                <div class="post-title">
+                  <!-- <h4><a [routerLink]="" (click)="onViewIdee(event.idIdee)">{{event.titre}}</a></h4> -->
+                  <br>
+                  <h6>Titre : </h6> <p>{{event.titre}}</p>
+                  <br>
+                  <h6>Date : </h6> <p>{{event.date}}</p>
+                  <br>
+                  <h6>Lieu : </h6> <a href="https://www.google.fr/maps/place/{{event.lieu}}/">{{event.lieu}}</a>
+                  <br>
+                  <br>
+                  <h6>Description : </h6> <p>{{event.description}} </p>
+                  <br>
+                  <span class="p-date">by <a>{{event.user.prenom }} {{event.user.nom}}</a> </span>
+                </div>
+
+                <!--<div style="margin-right: 5px; float: right;">
+                  <button type="button" class="btn btn-success"
+                          style="background-color:#60b2d2d1; border-color:#60b2d2d1">Modifier
+                  </button>
+                  <button type="button" class="btn btn-success"
+                          style="background-color:#60b2d2d1; margin: 10px; border-color:#60b2d2d1">Supprimer
+                  </button>
+                </div>-->
+
+              </div>
+            </div>
+
+          </div>
+          <!--  <button class="btn-view btn-load-more">Load More</button>-->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>

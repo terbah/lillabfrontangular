@@ -1,0 +1,155 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<body>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <h1>Lillab'Connect</h1>
+    <span class="menu-spacer"></span>
+    <div>
+
+      <a mat-button [routerLink]="'/idees'" routerLinkActive="active"> Idees</a>
+      <button mat-button [matMenuTriggerFor]="menu">Appel à Projets</button>
+      <mat-menu #menu="matMenu">
+        <div>
+          <button mat-menu-item [routerLink]="'/projetCreation'">Créer un projet</button>
+          <button [disabled]="user.typeutilisateur!==userIng" mat-menu-item>Mes projets</button>
+        </div>
+
+      </mat-menu>
+
+      <!-- <a mat-button [routerLink]="'/idees'" routerLinkActive="active"> Idees </a>-->
+
+      <button mat-button [routerLink]="'/stories'" routerLinkActive="active"> Success Stories</button>
+
+      <button mat-button [matMenuTriggerFor]="menuEvenements">Evenements</button>
+      <mat-menu #menuEvenements="matMenu">
+        <button mat-menu-item [routerLink]="'/evenements'"> Evènements</button>
+        <button mat-menu-item [routerLink]="'/evenementCreation'">Créer un évènement</button>
+      </mat-menu>
+
+      <button mat-button [routerLink]="'/profile'" routerLinkActive="active"> Profil</button>
+    </div>
+    <span class="example-spacer"></span>
+    <a mat-button (click)="logout()"> Déconnexion </a>
+  </mat-toolbar-row>
+</mat-toolbar>
+<br>
+<br>
+<div class="container">
+  <table class="table table-striped">
+    <tbody>
+    <tr>
+      <td colspan="1">
+        <form class="well form-horizontal" [formGroup]="formProjet" (ngSubmit)="onSubmit()">
+          <fieldset>
+            <div class="form-group">
+              <label class="col-md-4 control-label">Titre</label>
+              <div class="col-md-8 inputGroupContainer">
+                <div class="input-group">
+                  <input placeholder="Titre" formControlName="titre" class="form-control" type="text"></div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label">Description</label>
+              <div class="col-md-8 inputGroupContainer">
+                <div class="input-group">
+                  <textarea class="form-control" rows="4" placeholder="La description" formControlName="description">
+                </textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label">Budget</label>
+              <div class="col-md-8 inputGroupContainer">
+                <div class="input-group">
+                  <input placeholder="Budget" formControlName="budget" class="form-control" type="text"></div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label">Nombre de participants</label>
+              <div class="col-md-8 inputGroupContainer">
+                <div class="input-group">
+                  <input placeholder="Nombre de participants" formControlName="nbparticipants" class="form-control"
+                         type="number"></div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label">Compétences</label>
+              <div class="col-md-8 inputGroupContainer">
+                <mat-form-field appearance="outline" class="input-group">
+                  <mat-select required formControlName="competencesList" multiple>
+                    <mat-option *ngFor="let competence of competences"
+                                [value]="competence">{{competence.libelle}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <!--
+
+            <h3>Laboratoire<span class="star"> *</span></h3>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-select  formControlName="laboratory" required>
+            <mat-option *ngFor="let laboratoire of laboratoires" [value]="laboratoire.designation">{{laboratoire.designation}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+            -->
+
+            <div class="form-group">
+              <label class="col-md-4 control-label">Domaines</label>
+              <div class="col-md-8 inputGroupContainer">
+                <mat-form-field appearance="outline" style="background-color: white" class="input-group">
+                  <mat-select style="background-color: white" required formControlName="domainesList" multiple>
+                    <mat-option *ngFor="let domaine of domaines" [value]="domaine">{{domaine.libelle}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <!-- <div class="form-group">
+               <label class="col-md-4 control-label">Image</label>
+               <div class="col-md-8 inputGroupContainer">
+                 <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                   <input  placeholder="Postal Code/ZIP" class="form-control" required="true" value="" type="text"></div>
+               </div>
+             </div>-->
+
+            <div class="form-group">
+              <label class="col-md-4 control-label">Date de début</label>
+              <div class="col-md-8 inputGroupContainer">
+                <div class="input-group">
+                  <input placeholder="Date de début" class="form-control" formControlName="dateDebut" required="true"
+                         value="" type="date"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-4 control-label">Date de fin</label>
+              <div class="col-md-8 inputGroupContainer">
+                <div class="input-group">
+                  <input placeholder="Date de fin" class="form-control" required="true" formControlName="dateFin"
+                         value="" type="date"></div>
+              </div>
+            </div>
+
+            <!--  <div class="form-group">
+                <label class="col-md-4 control-label">Fichier</label>
+                <div class="col-md-8 inputGroupContainer">
+                  <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span><input id="email" name="email" placeholder="Email" class="form-control" required="true" value="" type="text"></div>
+                </div>
+              </div>-->
+          </fieldset>
+          <div id="wrapper">
+            <button type="submit" class="btn btn-info" [disabled]="!formProjet.valid">Valider</button>
+            <!-- <button routerLink="/authentification" type="button"class="connexionButton" mat-raised-button>Connexion</button> -->
+          </div>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>

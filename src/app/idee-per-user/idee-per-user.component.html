@@ -1,0 +1,101 @@
+<body>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <h1>Lillab'Connect</h1>
+    <span class="menu-spacer"></span>
+    <div>
+
+      <button mat-button [matMenuTriggerFor]="menu">Idees</button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="'/idees'">Toutes les idées</button>
+        <button mat-menu-item [routerLink]="'/ideeCreation'">Créer une idée</button>
+        <button mat-menu-item [routerLink]="'/ideesPerUser'">Mes idées</button>
+      </mat-menu>
+
+      <!-- <a mat-button [routerLink]="'/idees'" routerLinkActive="active"> Idees </a>-->
+      <button mat-button [routerLink]="'/projets'" routerLinkActive="active"> Appel à Projets  </button>
+      <button mat-button [routerLink]="'/stories'" routerLinkActive="active"> Success Stories </button>
+      <button mat-button [routerLink]="'/evenements'" routerLinkActive="active"> Evènements </button>
+      <button mat-button [routerLink]="'/profile'" routerLinkActive="active"> Profil </button>
+    </div>
+    <span class="example-spacer"></span>
+    <!-- <mat-icon>more_vert</mat-icon>-->
+    <a mat-button (click)="logout()"> Déconnexion </a>
+  </mat-toolbar-row>
+</mat-toolbar>
+<section>
+  <div class="gap gray-bg">
+    <div class="container">
+      <div class="row" id="page-contents">
+        <div class="col-lg-12">
+          <div class="blog-sec">
+            <!--<div class="post-filter-sec">
+              <form method="post" class="filter-form">
+                <input type="post" placeholder="Rechercher une idée">
+                <button><i class="ti-search"></i></button>
+              </form>
+              <div class="purify">
+                <span>filtrer par</span>
+                <select>
+                  <option>Par mot-clés</option>
+                  <option>Par tags</option>
+
+                </select>
+                <select>
+                  <option>Descendant (date)</option>
+                  <option>Ascendant (date)</option>
+                  <option>Ascendant (likes)</option>
+                  <option>Descendant (likes)</option>
+
+                </select>
+                <a href="#" title="">rafraîchir</a>
+              </div>
+            </div>-->
+            <div class="l-post" *ngFor="let idee of idees">
+              <figure>
+                <img src="../assets/images/resources/bloglist-1.jpg" alt="">
+
+              </figure>
+              <div class="l-post-meta">
+                <div class="post-title">
+                  <h4><a [routerLink]="'/ideesPerUser/view/'+idee.idIdee" (click)="onViewIdee(idee.idIdee)">{{idee.titre}}</a></h4>
+                  <p  class="hidden-text-description">{{idee.description}} </p>
+                  <h6>Domaine(s) concerné(s)</h6>
+                  <div class="sub-category"  *ngFor="let domaine of idee.domaines" style="display:inline-block;">
+                    <a href="#">{{domaine.libelle}}</a>
+                  </div>
+                  <p></p>
+                  <h6>Compétence(s) concernée(s)</h6>
+                  <div class="sub-category" *ngFor="let competence of idee.comptences" style="display:inline-block;">
+                    <a href="#">{{competence.libelle}}</a>
+                  </div>
+                  <br>
+                  <span class="p-date">by <a>{{idee.user.prenom }} {{idee.user.nom}}</a> {{idee.dateCrea}} </span>
+                </div>
+                <div class="with-icon">
+                  <mat-icon [ngClass]="{'red-icon': idee.like.length > 0, 'gray-icon':idee.like.length === 0 }">favorite</mat-icon>
+                  {{idee.like.length}}
+                  <mat-icon [ngClass]="{'blue-comment': idee.commentaires.length > 0, 'gray-icon':idee.commentaires.length === 0 }" style=" margin: 10px;">comment</mat-icon>
+                  {{idee.commentaires.length}} comment(s)
+
+                </div>
+                <div style="margin-right: 5px; float: right;">
+                  <button type="button" class="btn btn-success"
+                          style="background-color:#60b2d2d1; border-color:#60b2d2d1" (click)="getIdeeDetail(idee.idIdee)">Modifier
+                  </button>
+                  <button type="button" class="btn btn-success" (click)="deleteIdeePerUser(idee.idIdee)"
+                          style="background-color:#60b2d2d1; margin: 10px; border-color:#60b2d2d1">Supprimer
+                  </button>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+          <!--  <button class="btn-view btn-load-more">Load More</button>-->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>

@@ -1,0 +1,118 @@
+<body>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <h1>Lillab'Connect</h1>
+    <span class="menu-spacer"></span>
+    <div>
+
+      <button mat-button [matMenuTriggerFor]="menu">Idees</button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="'/idees'">Toutes les idées</button>
+        <button mat-menu-item [routerLink]="'/ideeCreation'">Créer une idée</button>
+        <button mat-menu-item [routerLink]="'/ideesPerUser'">Mes idées</button>
+      </mat-menu>
+
+      <!-- <a mat-button [routerLink]="'/idees'" routerLinkActive="active"> Idees </a>-->
+      <button mat-button [routerLink]="'/projets'" routerLinkActive="active"> Appel à Projets  </button>
+      <button mat-button [routerLink]="'/stories'" routerLinkActive="active"> Success Stories </button>
+      <button mat-button [routerLink]="'/evenements'" routerLinkActive="active"> Evènements </button>
+      <button mat-button [routerLink]="'/profile'" routerLinkActive="active"> Profil </button>
+    </div>
+    <span class="example-spacer"></span>
+    <!-- <mat-icon>more_vert</mat-icon>-->
+    <a mat-button (click)="logout()"> Déconnexion </a>
+  </mat-toolbar-row>
+</mat-toolbar>
+<section>
+  <div class="gap ext-bottom" *ngIf="dataIsAvailable">
+    <div class="container">
+      <div class="row">
+        <div class="offset-lg-1 col-lg-10">
+          <div class="detail-page">
+            <div class="detail-top">
+              <img src="../assets/images/resources/blog-detailfull.jpg" alt="">
+            </div>
+            <div class="detail-meta">
+              <h2>{{this.ideeDetails.titre}}</h2>
+
+              <div class="post-time">
+                <div class="author-thumb">
+                  <img src="../assets/images/resources/chatlist2.jpg" alt="">
+                  <span><a href="#" title="">{{this.ideeDetails.user.prenom}} {{this.ideeDetails.user.nom}}</a></span>
+                </div>
+                <span class="post-date">
+										<i class="fa fa-calendar"></i>
+										<a title="" href="#">{{this.ideeDetails.dateCrea}}</a>
+									</span>
+                <span class="coments">
+										<i class="fa fa-comments"></i>
+										<a title="" href="#">{{this.commentLength}} commentaire(s)</a>
+									</span>
+              </div>
+              <p class="ow-break-word">{{this.ideeDetails.description}}
+              </p>
+
+
+              <div class="tag-n-cat">
+                <div class="tags" *ngFor="let domaine of this.ideeDetails.domaines">
+                  <span><i class="fa fa-tags" style="display:inline-block;"></i>
+                    Post Tags:</span>
+                  <a href="#" title="" >{{domaine.libelle}}</a>
+                </div>
+                <div class="tags" *ngFor="let competence of this.ideeDetails.comptences">
+                  <span><i class="fa fa-filter" style="display:inline-block;"></i> Post Categories:</span>
+                  <a href="#" title="">{{competence.libelle}}</a>
+                </div>
+
+              <!--  <div class="tags" *ngFor="let laboratoire of this.ideeDetails.laboratoires">
+                  <span><i class="fa fa-filter" style="display:inline-block;"></i> Post TEST:</span>
+                  <a href="#" title="">{{laboratoire.designation}}</a>
+                </div>-->
+              </div>
+
+              <div class="gap-60 no-top">
+                <div class="comment-area">
+                  <h4 class="comment-title">{{commentsPerIdea.length}} Commentaire(s)</h4>
+                  <ul class="comments" *ngFor="let commentaire of commentsPerIdea">
+                    <li>
+                      <div class="comment-box">
+                        <div class="commenter-photo">
+                          <img alt="" src="../assets/images/resources/commenter-1.jpg">
+                        </div>
+                        <div class="commenter-meta">
+                          <div class="comment-titles">
+                            <h6>{{commentaire.utilisateurDto.prenom}} {{commentaire.utilisateurDto.nom}}</h6>
+                            <span>12 june 2017</span>
+                          </div>
+                          <p>
+                            {{commentaire.textCom}}
+                          </p>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div><!-- comments sec -->
+              <div class="gap-60 no-gap">
+                <h4 class="comment-title">Laissez un commentaire</h4>
+                 <div class="contact-form">
+                   <form [formGroup]="commentCreationForm"  (ngSubmit)="onSubmit()">
+                     <div class="form-group">
+                       <label class="control-label" for="textarea">Message</label><i class="mtrl-select"></i>
+                       <textarea rows="4" id="textarea" formControlName="texteComment">
+                       </textarea>
+                     </div>
+                     <div class="submit-btns">
+                       <button class="mtr-btn signup" type="submit"  [disabled] = "!commentCreationForm.valid"><i>Publier</i></button>
+                     </div>
+                   </form>
+                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>

@@ -1,0 +1,56 @@
+<body class="content">
+<div class="example-container">
+  <mat-card>
+    <mat-card-title>Veuiller renseigner les champs pour creer un utilisateur</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="userCreationForm" (ngSubmit)="onSubmit()">
+        <h3>Nom<span class="star"> *</span></h3>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <input matInput placeholder="Votre Nom" type="text" minlength="2" formControlName="nom">
+        </mat-form-field>
+        <h3>Prénom<span class="star"> *</span></h3>
+        <mat-form-field appearance="outline" class="full-width">
+          <input matInput placeholder="Votre Prénom" type="text" minlength="2" formControlName="prenom">
+        </mat-form-field>
+        <h3>Email<span class="star"> *</span></h3>
+        <mat-form-field appearance="outline" class="full-width">
+          <input matInput placeholder="Votre adresse mail" type="email" formControlName="email">
+        </mat-form-field>
+
+        <h3>Mot de passe<span class="star"> *</span></h3>
+        <mat-form-field appearance="outline" class="full-width">
+          <input matInput placeholder="Votre mot de passe" type="password" minlength="8" formControlName="motdepasse">
+        </mat-form-field>
+
+        <h3>Type<span class="star"> *</span></h3>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-select  formControlName="typeutilisateur" required>
+            <mat-option *ngFor="let type of types" [value]="type.libelle">{{type.libelle}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <h3>Domaine<span class="star"> *</span></h3>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-select  multiple formControlName="domaine" required>
+            <mat-option *ngFor="let domaine of domaines" [value]="domaine.libelle">{{domaine.libelle}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <h3>Laboratoire<span class="star"> *</span></h3>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-select  formControlName="laboratory" required>
+            <mat-option *ngFor="let laboratoire of laboratoires" [value]="laboratoire.designation">{{laboratoire.designation}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div id="wrapper">
+          <button type="submit" mat-raised-button [disabled]="!userCreationForm.valid">Valider</button>
+          <!-- <button routerLink="/authentification" type="button"class="connexionButton" mat-raised-button>Connexion</button> -->
+        </div>
+      </form>
+
+
+    </mat-card-content>
+  </mat-card>
+
+</div>
+
+</body>
